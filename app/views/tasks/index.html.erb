@@ -1,0 +1,29 @@
+<h1>Tasks#index</h1>
+<p>Find me in app/views/tasks/index.html.erb</p>
+
+
+<table>
+  <tr>
+    <th>Name</th>
+    <th>Content</th>
+    <th>Status</th>
+    <th>Action</th>
+  </tr>
+  <% @tasks.each do |task| %>
+  <tr>
+    <td><%= link_to task.name, task_path(task) %></td>
+    <td><%= task.content %></td>
+    <td><% if task.done == true %>Done!<% else %>To do!<% end %></td>
+    <td>
+      <%= link_to "Delete", task_path(task),
+      method: :delete,
+      data: { confirm: "Are you sure?" } %>
+      <%= link_to "Edit", edit_task_path(task) %>
+      <%= link_to "Done?", done_task_path(task),
+      method: :put %>
+      </td>
+  </tr>
+  <% end %>
+</table>
+
+<%= link_to "Add a new task", new_task_path %>
